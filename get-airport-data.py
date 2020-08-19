@@ -10,11 +10,6 @@ def main():
   clean_airport_data(AIRPORT_DATA_FILENAME)
   print("Finished succesfully")
 
-def _write_to_file(filename, data):
-  fo = open(filename, 'wb')
-  fo.write(data)
-  fo.close()
-
 def download_airport_data(data_url, data_filename):
   print("Downloading airport data from: '" + data_url + "'...")
   airport_data = requests.get(data_url, allow_redirects=True)
