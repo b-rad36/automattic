@@ -1,3 +1,4 @@
+#TODO use env variables for profile/region
 variable "aws_profile" {
   description = "AWS Profile to use for the deployment"
   type        = string
@@ -7,8 +8,10 @@ variable "aws_region" {
   description = "AWS Region the resources will be deploymed to"
   type        = string
 }
+
 variable "dynamodb_table_name" {
   description = "Name of the DynamoDB table that will be created and populated"
+  default     = "airport-data"
   type        = string
 }
 
