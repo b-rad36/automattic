@@ -14,7 +14,8 @@ def lambda_handler(event, context):
   response = client.get_item(
     TableName = TABLE_NAME,
     Key       = { IATA_CODE:{ 'S': iata_path_code }},
-    ProjectionExpression = 'municipality, iso_country'
+    ProjectionExpression = 'municipality, iso_country',
+    ConsistentRead = True
   )
 
   data = {}

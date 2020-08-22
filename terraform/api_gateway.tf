@@ -9,7 +9,7 @@ resource "aws_api_gateway_resource" "iata_root" {
    path_part   = "iata"
 }
 
-resource "aws_api_gateway_resource" "MyDemoResource" {
+resource "aws_api_gateway_resource" "api_resource" {
   rest_api_id = aws_api_gateway_rest_api.airport_iata_codes.id
   parent_id   = aws_api_gateway_resource.iata_root.id
   path_part   = "{iata+}"
@@ -17,7 +17,7 @@ resource "aws_api_gateway_resource" "MyDemoResource" {
 
 resource "aws_api_gateway_method" "proxy" {
    rest_api_id   = aws_api_gateway_rest_api.airport_iata_codes.id
-   resource_id   = aws_api_gateway_resource.MyDemoResource.id
+   resource_id   = aws_api_gateway_resource.api_resource.id
    http_method   = "GET"
    authorization = "NONE"
 }

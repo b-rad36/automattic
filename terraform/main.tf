@@ -1,14 +1,3 @@
-#TODO use env variables for profile/region
-variable "aws_profile" {
-  description = "AWS Profile to use for the deployment"
-  type        = string
-}
-
-variable "aws_region" {
-  description = "AWS Region the resources will be deploymed to"
-  type        = string
-}
-
 variable "dynamodb_table_name" {
   description = "Name of the DynamoDB table that will be created and populated"
   default     = "airport-data"
@@ -16,12 +5,13 @@ variable "dynamodb_table_name" {
 }
 
 provider "aws" {
-  profile = var.aws_profile
-  region  = var.aws_region
   version = "~> 2.0"
 }
 
-#https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dynamodb_table
+provider "null" {
+  version = "~> 2.0"
+}
+
 resource "aws_dynamodb_table" "airport_dynamodb_table" {
   name         = var.dynamodb_table_name 
   billing_mode = "PAY_PER_REQUEST"
@@ -34,9 +24,22 @@ resource "aws_dynamodb_table" "airport_dynamodb_table" {
  
   provisioner "local-exec" {
     command     = "python3 airport-data-to-dynamo.py ${var.dynamodb_table_name}"
-    environment = {
-      AWS_PROFILE         = var.aws_profile
-      AWS_DEFAULT_REGION  = var.aws_region
-    }
   }
 }
+
+resource "null_resource" "get_airports" {
+  depends_on = [
+	aws_dynamodb_table.airport_dynamodb_table, 
+	aws_lambda_function.airport_iata_codes,
+        aws_iam_role_policy_attachment.lambda_dynamodb_attach,
+	aws_api_gateway_deployment.deployment ]
+  
+  triggers = {
+    always_run = "${timestamp()}"
+  }
+
+  provisioner "local-exec" {
+    command = "bash -c 'sleep 15; ./get-airport-info.sh ${aws_api_gateway_deployment.deployment.invoke_url}'"
+    }
+}
+

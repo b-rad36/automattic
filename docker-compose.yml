@@ -1,0 +1,17 @@
+version: "3.7"
+services:
+  automattic:
+    environment:
+      AWS_PROFILE: <FILL_ME_IN>
+      AWS_DEFAULT_REGION: <FILL_ME_IN>
+    image: brad
+    working_dir: /automattic/terraform
+    volumes:
+      - type: bind
+        source: $HOME/.aws
+        target: /root/.aws
+        read_only: true
+      - type: bind
+        source: .
+        target: /automattic
+
