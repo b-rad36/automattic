@@ -11,6 +11,7 @@
 $ docker build -t brad .
 $ docker-compose run --rm automattic
 
+$ aws sts get-caller-identity > /dev/null 2>&1 || { echo 'AWS vars not configured'; exit 1; }
 $ terraform init && terraform apply --auto-approve && terraform destroy --auto-approve
 
 $ cat automattic-airports.json

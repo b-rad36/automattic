@@ -2,8 +2,8 @@ version: "3.7"
 services:
   automattic:
     environment:
-      AWS_PROFILE: <FILL_ME_IN>
-      AWS_DEFAULT_REGION: <FILL_ME_IN>
+      AWS_PROFILE: "${AWS_PROFILE}"
+      AWS_DEFAULT_REGION: "${AWS_REGION}"
     image: brad
     working_dir: /automattic/terraform
     volumes:
