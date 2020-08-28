@@ -65,7 +65,7 @@ Note that you will need to use tag 'brad' as that is what referenced in `docker-
 ```$ docker-compose run --rm automattic```
 
 ## From the container
-####Verify that your AWS Profile is configured properly. If not check, `.env` and `~/.aws/credentials`.  
+#### Verify that your AWS Profile is configured properly. If not check, `.env` and `~/.aws/credentials`.  
 ```$ aws sts get-caller-identity > /dev/null 2>&1 || { echo 'AWS vars not configured'; exit 1; }```
 
 #### Initialize Terraform
