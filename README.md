@@ -36,9 +36,9 @@ The other 4 data centres are:
   * San Antonio, US (Orpiment)
   
 ## How I found this informatiion
-All this information I found by Examining the network traffic from the job posting page (https://automattic.com/work-with-us/systems-wrangler/). I found an inital call to get the map which provided all of the datacentre locations and their colors. After that, there are recurring calls to update the map which gave me the information of which data centers actually appear on the map.
+All this information I found by examining the network traffic from the job posting page (https://automattic.com/work-with-us/systems-wrangler/). I found an inital call to get the map which provided all of the datacentre locations and their colors. After that, there are recurring calls to update the map which gave me the information of which data centers actually appear on the map.
 
-THe locations in the network calls are represented by 3 letter codes. I recognized these as airport codes (know as IATA codes). At this point, I could have just used the IATA codes to do a quick search and learned the location of each data centres. I instead looked for an API that would be able to give me that info and I I could simply put all this into a script. Unfortunately, I didn't find and free APIs for airport data so I decided to make my own.
+The locations in the network calls are represented by 3 letter codes. I recognized these as airport codes (know as IATA codes). At this point, I could have just used the IATA codes to do a quick search and learned the location of each data centres. I instead looked for an API that would be able to give me that info and I I could simply put all this into a script. Unfortunately, I didn't find and free APIs for airport data so I decided to make my own.
 
 ## What's in this repo?
 This repo contains a combination of Terraform code, Bash and Python scripts and a Dockerfile.
